@@ -1,6 +1,7 @@
 # Load the MNIST dataset
 
 
+
 from keras.datasets import imdb
 import cPickle, gzip, numpy
 import wget
@@ -16,8 +17,5 @@ train_set, valid_set, test_set = cPickle.load(f)
 f.close()
 
 print('Loading data...')
-
 (X_train, y_train), (X_test, y_test) = imdb.load_data(nb_words=max_features,
-
- 
- 
+                                                      test_split=0.2)
