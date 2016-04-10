@@ -1,6 +1,6 @@
 import pylab
 import imageio
-
+filename="test_video.avi"
 vid = imageio.get_reader(filename,  'ffmpeg')
 image = vid.get_data(10) #10th frame
 fig = pylab.figure()
