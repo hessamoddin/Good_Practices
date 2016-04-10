@@ -11,6 +11,5 @@ filename = 'output.avi'
 
 cap = VideoCapture(filename)
 cap.open()
-cap = VideoCapture(filename)
 retval, image_skvideo = cap.read() #first frame
 cap.release()
