@@ -29,11 +29,6 @@ from skimage.feature import daisy
 import Daisy_Extractor
 
 def Daisy_Extractor_Fn(vid,frame_no,new_shape=(120,180),step=16, radius=10):
-#filename="v_shooting_16_03.avi"
-#filename=="v_biking_08_01.avi"
-#filename="v_biking_06_04.avi"
-#filename="v_swing_23_02.avi"
-#frame_no=111
     if frame_no<num_frames: 
         frame = vid.get_data(frame_no) 
         frame_resized=resize(frame, new_shape)
