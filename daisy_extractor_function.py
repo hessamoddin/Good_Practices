@@ -15,6 +15,7 @@
 #  limitations under the License.
 
 from __future__ import division, print_function, absolute_import
+from __future__ import print_function
 from six.moves import cPickle
 import itertools
 import os
@@ -26,24 +27,54 @@ import imageio
 from skimage.transform import resize
 from skimage.color import rgb2gray
 from skimage.feature import daisy
-import Daisy_Extractor
+from keras.preprocessing import sequence
+from keras.utils import np_utils
+from keras.models import Sequential
+from keras.layers.core import Dense, Dropout, Activation
+from keras.layers.embeddings import Embedding
+from keras.layers.recurrent import LSTM
+from keras.datasets import imdb
+import matplotlib.cbook as cbook
 
-def Daisy_Extractor_Fn(vid,frame_no,new_shape=(120,180),step=16, radius=10):
+############################## Functions  ########################################
+def Split_Sequence(video_features,num_frames,timesteps):
+       return 0
+        
+def Daisy_Extractor_Fn(vid,frame_no,new_shape=(120,180),step=50, radius=20):
+#filename="v_shooting_16_03.avi"
+#filename=="v_biking_08_01.avi"
+#filename="v_biking_06_04.avi"
+#filename="v_swing_23_02.avi"
+#frame_no=111
     if frame_no<num_frames: 
-        frame = vid.get_data(frame_no) 
+        frame = vid.get_data(frame_no)  
         frame_resized=resize(frame, new_shape)
         frame_gray= rgb2gray(frame_resized)
         daisy_desc = daisy(frame_gray,step=step, radius=radius)
         descs_1D=np.ravel(daisy_desc)
-        print(descs_1D.shape)
     else:
         print("Frame number is larger than the length of video")
     return descs_1D
     
-filename="/home/hessam/Desktop/practice_code/test_video.avi"
+############################## Parameters  ########################################
+timesteps=20
+batch_size = 32
+
+filename="/home/hessam/Desktop/practice_code/v_biking_06_04.avi"
 vid = imageio.get_reader(filename,  'ffmpeg')
 num_frames=vid._meta['nframes']
-frame_no=10
+video_features=[]
+
 # Extract and concatenate Daisy features
-daisy_desc=Daisy_Extractor_Fn(vid,frame_no)
-print(daisy_desc.shape)
+for frame_no in xrange(num_frames):    
+     daisy_desc=Daisy_Extractor_Fn(vid,frame_no)
+     video_features.append(daisy_desc)
+video_features = np.array(video_features)
+data_dim=daisy_desc.shape[0]
+
+print('Feature dimention: %d'%data_dim)
+print('Num of frames: %d'%num_frames)
+
+
+
+
