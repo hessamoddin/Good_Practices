@@ -8,7 +8,7 @@ vid = imageio.get_reader(filename,  'ffmpeg')
 # number of frames in video
 num_frames=vid._meta['nframes']
 #10th frame
-frame = vid.get_data(1) 
+frame = vid.get_data(10) 
 #resize frame
 frame_resized=resize(frame, (100, 100))
 #convert the color frame to gray-scale
