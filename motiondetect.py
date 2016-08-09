@@ -37,5 +37,4 @@ class Screenshot(QWebView):
         self._loaded = True
 
 s = Screenshot()
-s.capture('http://webscraping.com', 'website.png')
-s.capture('http://webscraping.com/blog', 'blog.png')
+s.capture('http://www.ustream.tv/', 'website.png')
