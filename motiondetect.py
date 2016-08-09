@@ -37,4 +37,4 @@ class Screenshot(QWebView):
         self._loaded = True
 
 s = Screenshot()
-s.capture('http://www.ustream.tv/', 'website.png')
+s.capture('http://www.ustream.tv/channel/iss-hdev-payload', 'website.png')
